@@ -43,6 +43,7 @@ import com.vk.sdk.dialogs.VKShareDialog;
 import com.vk.sdk.api.photo.VKUploadImage;
 import com.vk.sdk.api.photo.VKImageParameters;
 import com.vk.sdk.util.VKJsonHelper;
+import com.vk.sdk.util.VKUtil;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -264,7 +265,7 @@ public class SocialVk extends CordovaPlugin {
     
     private boolean getFingerprint(final CallbackContext callbackContext) {
         Activity activity = getActivity();
-        String[] fingerprints = VKSdk.getCertificateFingerprint(activity, activity.getPackageName());
+        String[] fingerprints = VKUtil.getCertificateFingerprint(activity, activity.getPackageName());
         JSONArray resultArray = stringArrayToJsonArray(fingerprints);
         callbackContext.sendPluginResult(new PluginResult(PluginResult.Status.OK, resultArray));
         return true;
