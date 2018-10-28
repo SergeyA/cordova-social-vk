@@ -260,10 +260,13 @@ public class SocialVk extends CordovaPlugin {
     
     private boolean getFingerprint(final CallbackContext callbackContext) {
         Activity activity = getActivity();
-        String[] fingerprints = VKUtil.getCertificateFingerprint(activity, activity.getPackageName());
-        JSONArray resultArray = SdkUtil.stringArrayToJsonArray(fingerprints);
+        String[] fingerprints = VKSdk.getCertificateFingerprint(activity, activity.getPackageName());
+        JSONArray resultArray = stringArrayToJsonArray(fingerprints);
         callbackContext.sendPluginResult(new PluginResult(PluginResult.Status.OK, resultArray));
         return true;
+    }
+    public static JSONArray stringArrayToJsonArray(String [] stringArray) {
+        return new JSONArray(Arrays.asList(stringArray));
     }
     
     private boolean shareOrLogin(final String url, final String comment, final String imageUrl)
