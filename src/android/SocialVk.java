@@ -44,6 +44,10 @@ import com.vk.sdk.api.photo.VKUploadImage;
 import com.vk.sdk.api.photo.VKImageParameters;
 import com.vk.sdk.util.VKJsonHelper;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 public class SocialVk extends CordovaPlugin {
     private static final String TAG = "SocialVk";
     private static final String ACTION_INIT = "initSocialVk";
