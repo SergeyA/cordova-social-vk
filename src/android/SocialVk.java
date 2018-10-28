@@ -48,6 +48,7 @@ public class SocialVk extends CordovaPlugin {
     private static final String TAG = "SocialVk";
     private static final String ACTION_INIT = "initSocialVk";
     private static final String ACTION_LOGIN = "login";
+    private static final String ACTION_GET_FINGERPRINT = "getFingerPrintVkSdk";
     private static final String ACTION_LOGOUT = "logout";
     private static final String ACTION_SHARE = "share";
     private static final String ACTION_USERS_GET = "users_get";
@@ -116,6 +117,8 @@ public class SocialVk extends CordovaPlugin {
             return true;
         } else if (ACTION_SHARE.equals(action)) {
             return shareOrLogin(args.getString(0), args.getString(1), args.getString(2));
+        } else if (ACTION_GET_FINGERPRINT.equals(action)) {
+            return getFingerprint(callbackContext);
         } else if (ACTION_USERS_GET.equals(action)) {
             HashMap<String, Object> params = new HashMap<String, Object>();
             params.put("user_ids", args.getString(0));
@@ -254,7 +257,15 @@ public class SocialVk extends CordovaPlugin {
         VKSdk.login(getActivity(), permissions);
         return true;
     }
-
+    
+    private boolean getFingerprint(final CallbackContext callbackContext) {
+        Activity activity = getActivity();
+        String[] fingerprints = VKUtil.getCertificateFingerprint(activity, activity.getPackageName());
+        JSONArray resultArray = SdkUtil.stringArrayToJsonArray(fingerprints);
+        callbackContext.sendPluginResult(new PluginResult(PluginResult.Status.OK, resultArray));
+        return true;
+    }
+    
     private boolean shareOrLogin(final String url, final String comment, final String imageUrl)
     {
         this.cordova.setActivityResultCallback(this);
