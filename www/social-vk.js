@@ -20,6 +20,9 @@ SocialVk.prototype.share = function(sourceURL, description, imageURL, successCal
 SocialVk.prototype.logout = function(successCallback, errorCallback) {
     cordova.exec(successCallback, errorCallback, "SocialVk", "logout", []);
 };
+SocialVk.prototype.isLogged = function(successCallback, errorCallback) {
+    cordova.exec(successCallback, errorCallback, "SocialVk", "isLogged", []);
+};
 
 // API methods
 
