@@ -265,7 +265,7 @@ public class SocialVk extends CordovaPlugin {
         VKSdk.login(getActivity(), permissions);
         return true;
     }
-    private boolean getFingerprint(final CallbackContext callbackContext) {
+    private boolean isLogged(final CallbackContext callbackContext) {
         boolean result = VKSdk.isLoggedin();
         callbackContext.sendPluginResult(new PluginResult(PluginResult.Status.OK, result));
         return true;
