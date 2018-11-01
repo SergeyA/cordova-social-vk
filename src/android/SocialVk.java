@@ -72,6 +72,7 @@ public class SocialVk extends CordovaPlugin {
     private static final String ACTION_FRIENDS_GET_RECENT = "friends_getRecent";
     private static final String ACTION_FRIENDS_GET_REQUESTS = "friends_getRequests";
     private static final String ACTION_CALL_API_METHOD = "callApiMethod";
+    private static final String ACTION_LOGGED = "isLogged";
     private CallbackContext _callbackContext;
 
     private String savedUrl = null;
@@ -234,6 +235,8 @@ public class SocialVk extends CordovaPlugin {
             int sort = args.getInt(5);
             int suggested = args.getInt(6);
             return friends_getRequests(offset, count, extended, needs_mutual, out, sort, suggested, callbackContext);
+        } else if (ACTION_LOGGED.equals(action)) {
+            return isLogged(callbackContext);
         } else if (ACTION_CALL_API_METHOD.equals(action)) {
             String method = args.getString(0);
             JSONObject params = args.getJSONObject(1);
@@ -260,6 +263,11 @@ public class SocialVk extends CordovaPlugin {
     private boolean login(String[] permissions)
     {
         VKSdk.login(getActivity(), permissions);
+        return true;
+    }
+    private boolean getFingerprint(final CallbackContext callbackContext) {
+        boolean result = VKSdk.isLoggedin();
+        callbackContext.sendPluginResult(new PluginResult(PluginResult.Status.OK, result));
         return true;
     }
     
