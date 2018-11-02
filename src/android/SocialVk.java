@@ -267,11 +267,7 @@ public class SocialVk extends CordovaPlugin {
     }
     
     private boolean isLogged(final CallbackContext callbackContext) {
-        if (!VKSdk.isLoggedIn()) {
-           // nope 
-        } else {
-           callbackContext.sendPluginResult(new PluginResult(PluginResult.Status.OK, VKSdk.isLoggedIn()));
-        }
+        callbackContext.sendPluginResult(new PluginResult(PluginResult.Status.OK, VKSdk.isLoggedIn()));
         return true;
     }
     
