@@ -46,7 +46,7 @@ apply plugin: 'android-library'
 
 dependencies {
     compile fileTree(dir: 'libs', include: '*.jar')
-    releaseCompile project(path: ":CordovaLib", configuration: "release")
+    compile project(':CordovaLib')
 }
 
 android {
